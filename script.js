@@ -3,6 +3,8 @@ function calculatePrimesMulticore(limit = 10 ** 5) {
     let results = [];
 
     console.time("Multicore calculation took: ")
+    let start = Date.now()
+    let end;
 
     for (let i = 0; i < numOfCores; i++) {
         let sliceSize = Math.floor(limit / numOfCores);
@@ -20,15 +22,19 @@ function calculatePrimesMulticore(limit = 10 ** 5) {
             if (event.data.isLastWorker) {
                 console.log(results);
                 console.timeEnd("Multicore calculation took: ")
+                end = Date.now()
             }
         };
     }
+    
+    return end - start
 }
 
-function calculatePrimes(limit = 10 ** 5) {
+function calculatePrimesSinglecore(limit = 10 ** 5) {
     const primes = [];
 
     console.time("Singlecore calculation took: ")
+    let start = Date.now()
     for (let i = 0; i < limit; i++) {
         let isPrime = true;
         
@@ -44,9 +50,20 @@ function calculatePrimes(limit = 10 ** 5) {
         }
     }
     console.timeEnd("Singlecore calculation took: ")
+    let end = Date.now()
 
     console.log(primes);
+    return end - start
 }
 
-calculatePrimes(10 ** 6)
-calculatePrimesMulticore(10 ** 6)
+document.querySelector('.launch-multicore').addEventListener("click", () => {
+    let limit = +document.querySelector('.limit').value;
+    let timeTook = calculatePrimesMulticore(limit)
+    document.querySelector('.multicore-result').innerHTML = `Multicore calculated in ${timeTook}ms`;
+});
+
+document.querySelector('.launch-singlecore').addEventListener("click", () => {
+    let limit = +document.querySelector('.limit').value;
+    let timeTook = calculatePrimesSinglecore(limit)
+    document.querySelector('.singlecore-result').innerHTML = `Singlecore calculated in ${timeTook}ms`;
+});
