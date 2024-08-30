@@ -1,4 +1,4 @@
-function calculatePrimesMulticore(limit = 10 ** 6) {
+function calculatePrimesMulticore(limit = 10 ** 5) {
     const numOfCores = navigator.hardwareConcurrency
     let results = [];
 
@@ -25,4 +25,28 @@ function calculatePrimesMulticore(limit = 10 ** 6) {
     }
 }
 
-calculatePrimesMulticore(10 ** 5)
+function calculatePrimes(limit = 10 ** 5) {
+    const primes = [];
+
+    console.time("Singlecore calculation took: ")
+    for (let i = 0; i < limit; i++) {
+        let isPrime = true;
+        
+        for (let j = 2; j < i; j++) {
+            if (i % j === 0) {
+                isPrime = false;
+                break;
+            }
+        }
+        if (isPrime) {
+            primes.push(i);
+            
+        }
+    }
+    console.timeEnd("Singlecore calculation took: ")
+
+    console.log(primes);
+}
+
+calculatePrimes(10 ** 6)
+calculatePrimesMulticore(10 ** 6)
