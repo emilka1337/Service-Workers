@@ -1,22 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./styles.css">
     <script defer src="./script.js"></script>
-    <!-- <script defer src="./myworker.js"></script> -->
-    <style>
-        button:active {
-            background: black;
-        }
-    </style>
 </head>
+
 <body>
-    <input type="text" class="limit" placeholder="Type your number here..." value="100000">
-    <button class="launch-multicore">Multicore</button>
-    <button class="launch-singlecore">Singlecore</button>
-    <p class="multicore-result"></p>
-    <p class="singlecore-result"></p>
+    <div class="app">
+        <p>Enter the number up to which you want to find prime numbers</p>
+        <input type="text" class="limit" placeholder="Type your number here..." value="100000">
+        <div class="run-buttons">
+            <button class="launch-multicore">Multicore</button>
+            <button class="launch-singlecore">Singlecore</button>
+        </div>
+        <p class="multicore-result"></p>
+        <p class="singlecore-result"></p>
+        <p class="primes"></p>
+    </div>
 </body>
+
 </html>
